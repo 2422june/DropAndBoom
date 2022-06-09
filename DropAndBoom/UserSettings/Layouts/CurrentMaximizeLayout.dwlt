@@ -186,8 +186,8 @@ MonoBehaviour:
     y: 0
     width: 363
     height: 558
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -224,9 +224,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 58d7ffff
-      m_LastClickedID: -10408
-      m_ExpandedIDs: 30fbffff
+      m_SelectedIDs: 94590000
+      m_LastClickedID: 22932
+      m_ExpandedIDs: 34fbffff94590000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -269,8 +269,8 @@ MonoBehaviour:
     y: 0
     width: 1103
     height: 558
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 8}
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.17653386, y: -0.08753749, z: -0.08400031}
+    m_Target: {x: 0.4647064, y: 3.6685815, z: 0.92334795}
     speed: 2
-    m_Value: {x: 0.17653386, y: -0.08753749, z: -0.08400031}
+    m_Value: {x: 0.4647064, y: 3.6685815, z: 0.92334795}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -551,13 +551,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.04976355, y: 0.032051943, z: -0.0015978061, w: -0.9982462}
+    m_Target: {x: -0.051284302, y: -0.011388025, z: 0.00058829493, w: -0.9986278}
     speed: 2
-    m_Value: {x: -0.04976351, y: 0.032051917, z: -0.0015978048, w: -0.99824536}
+    m_Value: {x: -0.05128385, y: -0.011387925, z: 0.00058828975, w: -0.99861896}
   m_Size:
-    m_Target: 0.6579348
+    m_Target: 1.3832374
     speed: 2
-    m_Value: 0.6579348
+    m_Value: 1.3832374
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -650,22 +650,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UnityProject\DropAndBoom\DropAndBoom
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2c6d0000
-    m_LastClickedID: 27948
-    m_ExpandedIDs: 000000002c6d000000ca9a3bffffff7f
+    m_SelectedIDs: d05a0000
+    m_LastClickedID: 23248
+    m_ExpandedIDs: 00000000165a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -693,7 +693,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000165a000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -718,8 +718,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 58d7ffff
-    m_LastClickedInstanceID: -10408
+    m_SelectedInstanceIDs: 94590000
+    m_LastClickedInstanceID: 22932
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -796,8 +796,8 @@ MonoBehaviour:
     y: 0
     width: 454
     height: 942
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
