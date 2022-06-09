@@ -40,7 +40,7 @@ public class BlockController : MonoBehaviour
 
                 isFalling = true;
             }
-            else if(!isBust)
+            else if(!isBust && !isLanding)
             {
                 Vec = Vector3.down;
                 Vec.y = fallSpeed * -5;
@@ -98,6 +98,9 @@ public class BlockController : MonoBehaviour
         Vec.y = 8.7f;
 
         Instantiate(Resources.Load<GameObject>("Prefabs/Block"), Vec, Quaternion.identity, null);
+
+        LineManager.inst.Check();
+        LineManager.inst.OverCheck();
 
         isLanding = true;
     }
