@@ -353,6 +353,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Info.cs"
 "Assets/Scripts/BlockController.cs"
+"Assets/Scripts/LineManager.cs"
 -langversion:9.0
 
 /deterministic
