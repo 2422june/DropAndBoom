@@ -384,6 +384,7 @@
 "Assets/Photon/PhotonRealtime/Demos/DemoLoadBalancing/ConnectAndJoinRandomLb.cs"
 "Assets/Scripts/BlockController.cs"
 "Assets/Scripts/Enemy/Player2_Controller.cs"
+"Assets/Scripts/GameManager.cs"
 "Assets/Scripts/LineManager.cs"
 -langversion:9.0
 
