@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using PN = Photon.Pun.PhotonNetwork;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     GameObject TitlePanel;
@@ -15,6 +18,13 @@ public class GameManager : MonoBehaviour
     GameObject victoryPanel;
     [SerializeField]
     GameObject LosePanel;
+
+    [SerializeField]
+    GameObject CustomRoomInputField;
+    [SerializeField]
+    GameObject IDBox;
+    [SerializeField]
+    GameObject EnterErrorBox;
 
     public enum Scene
     {
@@ -38,7 +48,12 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "loby":
+                if (scene == Scene.title)
+                {
+                    PN.ConnectUsingSettings();
+                }
                 scene = Scene.loby;
+                CustomRoomInputField.SetActive(false);
                 break;
 
             case "ingame":
@@ -65,6 +80,11 @@ public class GameManager : MonoBehaviour
         //LosePanel.SetActive(scene == Scene.lose);
     }
 
+    private void OnLoby()
+    {
+
+    }
+
     private IEnumerator TitleInput()
     {
         while(true)
@@ -86,6 +106,40 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+
+    }
+
+    public void OnClickEnterCustomRoom()
+    {
+        CustomRoomInputField.SetActive(true);
+    }
+
+    public void InputCustomRoomID()
+    {
+        Debug.Log("Create");
+        PN.JoinRoom(IDBox.GetComponent<TextMesh>().text, null);
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        ShowErrorBox(true);
+    }
+
+    public void OnClickEnterCustomRoomCancle()
+    {
+        CustomRoomInputField.SetActive(false);
+    }
+
+    public void OnClickRandomCustomRoom()
+    {
+
+    }
+
+    public void ShowErrorBox(bool show)
+    {
+        EnterErrorBox.SetActive(show);
+        if(show)
+            Invoke("ShowErrorBox(false)", 1f);
+
     }
 }
