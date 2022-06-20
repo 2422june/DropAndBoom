@@ -386,6 +386,7 @@
 "Assets/Scripts/Enemy/Player2_Controller.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/LineManager.cs"
+"Assets/Scripts/PlayerController.cs"
 -langversion:9.0
 
 /deterministic

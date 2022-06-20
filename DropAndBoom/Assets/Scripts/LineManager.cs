@@ -47,7 +47,6 @@ public class LineManager : MonoBehaviour
         vec = transform.position;
         vec.y += 15;
 
-        Debug.DrawRay(vec, transform.right, Color.red, 5);
         hit = Physics.RaycastAll(vec, transform.right, 1000);
 
 

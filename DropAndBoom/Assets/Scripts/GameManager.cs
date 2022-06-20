@@ -2,43 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 using PN = Photon.Pun.PhotonNetwork;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    GameObject TitlePanel;
-    [SerializeField]
-    GameObject LobyPanel;
-    [SerializeField]
-    GameObject IngamePanel;
-    [SerializeField]
-    GameObject victoryPanel;
-    [SerializeField]
-    GameObject LosePanel;
+    PhotonView PV;
 
     [SerializeField]
-    GameObject CustomRoomInputField;
+    private GameObject titlePanel;
     [SerializeField]
-    GameObject IDBox;
+    private GameObject lobyPanel;
     [SerializeField]
-    GameObject EnterErrorBox;
+    private GameObject loadingPanel;
+    [SerializeField]
+    private GameObject roomPanel;
+    [SerializeField]
+    private GameObject inGamePanel;
+    [SerializeField]
+    private GameObject victoryPanel;
+    [SerializeField]
+    private GameObject losePanel;
 
-    public enum Scene
+    [SerializeField]
+    private GameObject enterErrorBox;
+    [SerializeField]
+    private GameObject quitBoard;
+    [SerializeField]
+    private TMP_Text roomInfo;
+
+    [SerializeField]
+    private GameObject inGameObjects;
+    [SerializeField]
+    private TMP_Text countDown;
+
+    private enum Scene
     {
-        title, ingame, loby, victory, lose
+        title, loby, ingame
     };
 
-    public Scene scene;
+    private Scene scene;
 
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();
         SetScene("title");
+        PN.LocalPlayer.NickName = $"{Random.Range(0, 100)}";
     }
 
-    public void SetScene(string target)
+    private void SetScene(string target)
     {
         switch(target)
         {
@@ -48,24 +62,12 @@ public class GameManager : MonoBehaviourPunCallbacks
                 break;
 
             case "loby":
-                if (scene == Scene.title)
-                {
-                    PN.ConnectUsingSettings();
-                }
+                loadingPanel.SetActive(false);
                 scene = Scene.loby;
-                CustomRoomInputField.SetActive(false);
                 break;
 
             case "ingame":
                 scene = Scene.ingame;
-                break;
-
-            case "victory":
-                scene = Scene.victory;
-                break;
-
-            case "lose":
-                scene = Scene.lose;
                 break;
 
             default:
@@ -73,25 +75,17 @@ public class GameManager : MonoBehaviourPunCallbacks
                 break;
         }
 
-        TitlePanel.SetActive(scene == Scene.title);
-        LobyPanel.SetActive(scene == Scene.loby);
-        //IngamePanel.SetActive(scene == Scene.ingame);
-        //victoryPanel.SetActive(scene == Scene.victory);
-        //LosePanel.SetActive(scene == Scene.lose);
-    }
-
-    private void OnLoby()
-    {
-
+        titlePanel.SetActive(scene == Scene.title);
+        lobyPanel.SetActive(scene == Scene.loby);
     }
 
     private IEnumerator TitleInput()
     {
-        while(true)
+        while (true)
         {
             if (Input.anyKeyDown)
             {
-                SetScene("loby");
+                PN.ConnectUsingSettings();
                 break;
             }
 
@@ -99,25 +93,62 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    void Start()
+    private IEnumerator GameFadeOut()
     {
-        
+        while (quitBoard.transform.localPosition.y > 0)
+        {
+            quitBoard.transform.position += Vector3.down * Time.deltaTime * 1080f;
+
+            yield return null;
+        }
+        quitBoard.transform.position = Vector3.zero;
+        PN.Disconnect();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
     }
 
-    void Update()
+    public override void OnConnectedToMaster()
     {
-
+        PN.JoinLobby();
+        SetScene("loby");
     }
 
-    public void OnClickEnterCustomRoom()
+    public void OnClickEnterRandomRoom()
     {
-        CustomRoomInputField.SetActive(true);
+        lobyPanel.SetActive(false);
+        loadingPanel.SetActive(true);
+        PN.JoinRandomOrCreateRoom(
+            null, 2, Photon.Realtime.MatchmakingMode.RandomMatching,
+            null, null, $"{Random.Range(0, 1000)}",
+            new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
     }
 
-    public void InputCustomRoomID()
+    public override void OnJoinedRoom()
     {
-        Debug.Log("Create");
-        PN.JoinRoom(IDBox.GetComponent<TextMesh>().text, null);
+        loadingPanel.SetActive(false);
+        roomPanel.SetActive(true);
+        roomInfo.text = $"방 번호 : {PN.CurrentRoom.Name}";
+        if (PN.CurrentRoom.PlayerCount == PN.CurrentRoom.MaxPlayers)
+        {
+            loadingPanel.SetActive(true);
+            roomPanel.SetActive(false);
+            PV.RPC("EnterGame", RpcTarget.All, null);
+            StartCoroutine(InGame());
+        }
+    }
+
+    public override void OnCreatedRoom()
+    {
+        roomInfo.text = $"방 번호 : {PN.CurrentRoom.Name}";
+        loadingPanel.SetActive(false);
+        roomPanel.SetActive(true);
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Failed");
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -125,21 +156,54 @@ public class GameManager : MonoBehaviourPunCallbacks
         ShowErrorBox(true);
     }
 
-    public void OnClickEnterCustomRoomCancle()
+    public void OnClickQuitGame()
     {
-        CustomRoomInputField.SetActive(false);
+        if(!quitBoard.active)
+        {
+            PN.Disconnect();
+            quitBoard.SetActive(true);
+            StartCoroutine(GameFadeOut());
+        }
     }
 
-    public void OnClickRandomCustomRoom()
+    public void LeaveRoom()
     {
-
+        roomPanel.SetActive(false);
+        loadingPanel.SetActive(true);
+        PN.LeaveRoom();
     }
 
-    public void ShowErrorBox(bool show)
+    public void ShowErrorBox(bool show = false)
     {
-        EnterErrorBox.SetActive(show);
+        enterErrorBox.SetActive(show);
         if(show)
-            Invoke("ShowErrorBox(false)", 1f);
+            Invoke("ShowErrorBox", 3f);
+    }
 
+
+    WaitForSeconds one = new WaitForSeconds(1f);
+
+    [PunRPC]
+    private void EnterGame()
+    {
+        StartCoroutine(InGame());
+    }
+
+    private IEnumerator InGame()
+    {
+        loadingPanel.SetActive(false);
+        inGamePanel.SetActive(true);
+        for (int i = 5; i > 0; i--)
+        {
+            yield return one;
+            countDown.text = $"{i}";
+        }
+
+        while(true)
+        {
+            inGameObjects.SetActive(true);
+            countDown.text = "Count Down End";
+            break;
+        }
     }
 }

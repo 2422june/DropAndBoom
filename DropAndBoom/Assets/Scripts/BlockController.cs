@@ -56,15 +56,15 @@ public class BlockController : MonoBehaviour
             {
                 line++;
                 Vec = Vector3.zero;
-                Vec.x = 1.3f;
+                Vec.x = 1;
                 transform.position += Vec;
             }
             
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && line != -4)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && line != -5)
             {
                 line--;
                 Vec = Vector3.zero;
-                Vec.x = -1.3f;
+                Vec.x = -1;
                 transform.position += Vec;
             }
         }
@@ -72,10 +72,10 @@ public class BlockController : MonoBehaviour
         {
             if(!isLanding)
             {
-                if (transform.position.y <= -8)
+                if (transform.position.y <= -3)
                 {
                     Vec = transform.position;
-                    Vec.y = -8f;
+                    Vec.y = -3f;
                     transform.position = Vec;
 
                     CreateBlock();
@@ -95,7 +95,7 @@ public class BlockController : MonoBehaviour
         myRigid.velocity = Vector3.zero;
 
         Vec = Vector3.zero;
-        Vec.y = 8.7f;
+        Vec.y = 13f;
 
         Instantiate(Resources.Load<GameObject>("Prefabs/Block"), Vec, Quaternion.identity, null);
 
