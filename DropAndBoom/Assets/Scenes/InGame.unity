@@ -6011,7 +6011,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 2056363307}
     m_Modifications:
     - target: {fileID: 1919012471076396, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_Name
@@ -6019,7 +6019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6039,7 +6039,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_LocalRotation.y
@@ -6047,7 +6047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6063,6 +6063,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
+--- !u!4 &1579375972 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4023215848608658, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}
+  m_PrefabInstance: {fileID: 1579375971}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1637818006
 GameObject:
   m_ObjectHideFlags: 0
@@ -7309,7 +7314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2056363307
 Transform:
   m_ObjectHideFlags: 0
@@ -7325,6 +7330,7 @@ Transform:
   - {fileID: 2072493119}
   - {fileID: 2108182860}
   - {fileID: 1142589455}
+  - {fileID: 1579375972}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
