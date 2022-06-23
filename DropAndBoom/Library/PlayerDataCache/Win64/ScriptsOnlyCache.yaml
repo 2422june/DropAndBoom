@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - BlockController
     - GameManager
     - LineManager
+    - SoundManager
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
@@ -126,6 +127,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
@@ -193,13 +198,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 7318}
     - Class: 114
-      Script: {instanceID: 7868}
+      Script: {instanceID: 7870}
     - Class: 114
-      Script: {instanceID: 8252}
+      Script: {instanceID: 8254}
     - Class: 114
-      Script: {instanceID: 8384}
+      Script: {instanceID: 8386}
     - Class: 114
-      Script: {instanceID: 8716}
+      Script: {instanceID: 8718}
+    - Class: 114
+      Script: {instanceID: 29058}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1643,6 +1650,12 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerController
+  - hash:
+      serializedVersion: 2
       Hash: ae1347d9113eee8b83c5c8047dcf31a8
     assemblyName: Assembly-CSharp.dll
     namespaceName: Photon.Chat.Demo
@@ -1913,10 +1926,10 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 48c4ace769ae25513328c1d628f2fdaf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: PlayerController
+    className: SoundManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/InGame.unity

@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private TMP_Text countDown;
 
+    private bool isCanLeave;
+
     private enum Scene
     {
         title, loby, ingame
@@ -48,8 +50,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+        SoundManager.soundMNG = GetComponent<SoundManager>();
         SetScene("title");
         PN.LocalPlayer.NickName = $"{Random.Range(0, 100)}";
+        SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
+        isCanLeave = true;
     }
 
     private void SetScene(string target)
@@ -85,6 +90,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             if (Input.anyKeyDown)
             {
+                SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.title);
                 PN.ConnectUsingSettings();
                 break;
             }
@@ -117,6 +123,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void OnClickEnterRandomRoom()
     {
+        SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.title);
         lobyPanel.SetActive(false);
         loadingPanel.SetActive(true);
         PN.JoinRandomOrCreateRoom(
@@ -132,10 +139,19 @@ public class GameManager : MonoBehaviourPunCallbacks
         roomInfo.text = $"¹æ ¹øÈ£ : {PN.CurrentRoom.Name}";
         if (PN.CurrentRoom.PlayerCount == PN.CurrentRoom.MaxPlayers)
         {
-            loadingPanel.SetActive(true);
-            roomPanel.SetActive(false);
+            isCanLeave = false;
+            SoundManager.soundMNG.StopBGM();
+        }
+        //SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.inRoom);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if (PN.CurrentRoom.PlayerCount == PN.CurrentRoom.MaxPlayers)
+        {
+            isCanLeave = false;
+            SoundManager.soundMNG.StopBGM();
             PV.RPC("EnterGame", RpcTarget.All, null);
-            StartCoroutine(InGame());
         }
     }
 
@@ -160,6 +176,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if(!quitBoard.active)
         {
+            SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.gameExit);
             PN.Disconnect();
             quitBoard.SetActive(true);
             StartCoroutine(GameFadeOut());
@@ -168,9 +185,18 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        roomPanel.SetActive(false);
-        loadingPanel.SetActive(true);
-        PN.LeaveRoom();
+        if(isCanLeave)
+        {
+            SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.gameExit);
+            roomPanel.SetActive(false);
+            loadingPanel.SetActive(true);
+            PN.LeaveRoom();
+        }
+        else
+        {
+            SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.cant);
+        }
+        //SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
     }
 
     public void ShowErrorBox(bool show = false)
@@ -191,16 +217,28 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private IEnumerator InGame()
     {
+        yield return one;
+        yield return one;
+        //loadingPanel.SetActive(true);
+        roomPanel.SetActive(false);
+        SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.enterRoom);
+        yield return one;
+        yield return one;
+
         loadingPanel.SetActive(false);
         inGamePanel.SetActive(true);
-        for (int i = 5; i > 0; i--)
+        for (int i = 5; i >= 0; i--)
         {
             yield return one;
             countDown.text = $"{i}";
+            SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.enterRoom);
         }
 
-        while(true)
+        yield return one;
+
+        while (true)
         {
+            SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.inGame);
             inGameObjects.SetActive(true);
             countDown.text = "Count Down End";
             break;

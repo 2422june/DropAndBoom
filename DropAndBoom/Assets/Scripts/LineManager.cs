@@ -7,24 +7,33 @@ public class LineManager : MonoBehaviour
     public static LineManager inst;
 
     [SerializeField]
-    RaycastHit[] hit;
-    
-    int cnt;
+    private RaycastHit[] hit;
 
-    Vector3 vec;
+    [SerializeField]
+    private GameObject rayPos;
+    
+    private int cnt;
+
+    private Vector3 vec;
 
     private void Awake()
     {
         inst = this;
     }
 
+    private void Update()
+    {
+        Check();
+    }
+
     public void Check()
     {
         cnt = 0;
-        vec = transform.position;
+        vec = rayPos.transform.position;
 
-        hit = Physics.RaycastAll(vec, transform.right, 1000);
+        hit = Physics.RaycastAll(vec, transform.right, 1000, 1<<3);
 
+        Debug.DrawRay(vec, transform.right, Color.red, 1);
         Debug.Log(hit.Length);
 
         if (hit.Length > 10)

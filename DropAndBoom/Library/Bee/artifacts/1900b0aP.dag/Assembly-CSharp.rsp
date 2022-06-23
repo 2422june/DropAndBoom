@@ -336,6 +336,7 @@
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/LineManager.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/SoundManager.cs"
 -langversion:9.0
 
 /deterministic
