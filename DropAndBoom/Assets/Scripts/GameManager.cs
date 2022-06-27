@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private bool isCanLeave;
 
+    public static bool isDroper; // t = droper, f = boomer
+
     private enum Scene
     {
         title, loby, ingame
@@ -51,10 +53,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         PV = GetComponent<PhotonView>();
         SoundManager.soundMNG = GetComponent<SoundManager>();
-        SetScene("title");
+        SoundManager.soundMNG.Init();
         PN.LocalPlayer.NickName = $"{Random.Range(0, 100)}";
-        SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
         isCanLeave = true;
+        SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
+        SetScene("title");
     }
 
     private void SetScene(string target)
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         switch(target)
         {
             case "title":
+                SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
                 scene = Scene.title;
                 StartCoroutine(TitleInput());
                 break;
@@ -137,9 +141,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         loadingPanel.SetActive(false);
         roomPanel.SetActive(true);
         roomInfo.text = $"방 번호 : {PN.CurrentRoom.Name}";
+        isDroper = true;
         if (PN.CurrentRoom.PlayerCount == PN.CurrentRoom.MaxPlayers)
         {
             isCanLeave = false;
+            isDroper = false;
             SoundManager.soundMNG.StopBGM();
         }
         //SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.inRoom);
@@ -160,6 +166,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         roomInfo.text = $"방 번호 : {PN.CurrentRoom.Name}";
         loadingPanel.SetActive(false);
         roomPanel.SetActive(true);
+        isDroper = true;
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -240,6 +247,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.inGame);
             inGameObjects.SetActive(true);
+            if(isDroper)
+            {
+                PN.Instantiate("Prefabs/Block", Vector3.zero + (Vector3.up * 13), Quaternion.identity);
+            }
+            else
+            {
+                PN.Instantiate("Prefabs/Boomer", Vector3.zero, Quaternion.Euler(Vector3.up * 90));
+            }
             countDown.text = "Count Down End";
             break;
         }

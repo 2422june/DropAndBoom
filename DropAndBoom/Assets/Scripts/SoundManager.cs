@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
 
     int index = 0;
 
-    private void Start()
+    public void Init()
     {
         BGM = GetComponent<AudioSource>();
 
@@ -46,7 +46,9 @@ public class SoundManager : MonoBehaviour
 
     public void PlayBGM(bgmClip num)
     {
-        BGM.clip = bgmClips[(int)num];
+        while (BGM.clip != bgmClips[(int)num])
+            BGM.clip = bgmClips[(int)num];
+
         BGM.Play();
     }
 

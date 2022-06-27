@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - BlockController
     - GameManager
     - LineManager
+    - PlayerController
     - SoundManager
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
@@ -34,6 +35,12 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -182,31 +189,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5516}
     - Class: 114
-      Script: {instanceID: 5910}
+      Script: {instanceID: 5548}
     - Class: 114
       Script: {instanceID: 5912}
     - Class: 114
-      Script: {instanceID: 5958}
+      Script: {instanceID: 5914}
     - Class: 114
-      Script: {instanceID: 6164}
+      Script: {instanceID: 5960}
     - Class: 114
-      Script: {instanceID: 6318}
+      Script: {instanceID: 6166}
     - Class: 114
-      Script: {instanceID: 6670}
+      Script: {instanceID: 6320}
     - Class: 114
-      Script: {instanceID: 6684}
+      Script: {instanceID: 6672}
     - Class: 114
-      Script: {instanceID: 7318}
+      Script: {instanceID: 6686}
     - Class: 114
-      Script: {instanceID: 7870}
+      Script: {instanceID: 7320}
     - Class: 114
-      Script: {instanceID: 8254}
+      Script: {instanceID: 7634}
     - Class: 114
-      Script: {instanceID: 8386}
+      Script: {instanceID: 7872}
     - Class: 114
-      Script: {instanceID: 8718}
+      Script: {instanceID: 8256}
     - Class: 114
-      Script: {instanceID: 29058}
+      Script: {instanceID: 8388}
+    - Class: 114
+      Script: {instanceID: 8720}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -324,7 +333,7 @@ ScriptsOnlyBuild:
     className: PlayerOverviewPanel
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 048f7b1ffc17691fc9777468ad441c23
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LineManager
@@ -1206,6 +1215,12 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
+      Hash: 48c4ace769ae25513328c1d628f2fdaf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SoundManager
+  - hash:
+      serializedVersion: 2
       Hash: 2163458cae41cb1735c8b06fc34a9582
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -1924,12 +1939,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 48c4ace769ae25513328c1d628f2fdaf
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SoundManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/InGame.unity

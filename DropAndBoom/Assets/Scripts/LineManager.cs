@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class LineManager : MonoBehaviour
@@ -21,11 +23,6 @@ public class LineManager : MonoBehaviour
         inst = this;
     }
 
-    private void Update()
-    {
-        Check();
-    }
-
     public void Check()
     {
         cnt = 0;
@@ -36,7 +33,7 @@ public class LineManager : MonoBehaviour
         Debug.DrawRay(vec, transform.right, Color.red, 1);
         Debug.Log(hit.Length);
 
-        if (hit.Length > 10)
+        if (hit.Length >= 10)
         {
             Debug.Log("LineClear");
 
@@ -44,7 +41,7 @@ public class LineManager : MonoBehaviour
             {
                 if (hit[i].collider.CompareTag("Block"))
                 {
-                    Destroy(hit[i].collider.gameObject);
+                    PhotonNetwork.Destroy(hit[i].collider.gameObject);
                 }
             }
         }

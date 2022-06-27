@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class BlockController : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class BlockController : MonoBehaviour
 
     bool isBust, isFalling, isLanding;
 
-    int line;
+    int posX;
 
     Vector3 Vec;
 
@@ -17,17 +19,26 @@ public class BlockController : MonoBehaviour
 
     void Start()
     {
+        if (!GameManager.isDroper)
+        {
+            return;
+        }
         isFalling = false;
         isBust = false;
         isLanding = false;
         fallSpeed = 10f;
-        line = 0;
+        posX = 0;
 
         myRigid = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        if (!GameManager.isDroper)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(!isFalling)
@@ -52,19 +63,17 @@ public class BlockController : MonoBehaviour
 
         if(!isFalling)
         {
-           if (Input.GetKeyDown(KeyCode.RightArrow) && line != 4)
+           if (Input.GetKeyDown(KeyCode.RightArrow) && posX != 4)
             {
-                line++;
-                Vec = Vector3.zero;
-                Vec.x = 1;
+                posX++;
+                Vec = Vector3.right;
                 transform.position += Vec;
             }
             
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && line != -5)
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && posX != -5)
             {
-                line--;
-                Vec = Vector3.zero;
-                Vec.x = -1;
+                posX--;
+                Vec = Vector3.left;
                 transform.position += Vec;
             }
         }
@@ -78,10 +87,12 @@ public class BlockController : MonoBehaviour
                     Vec.y = -3f;
                     transform.position = Vec;
 
+                    myRigid.velocity = Vector3.zero;
                     CreateBlock();
                 }
-                else if(myRigid.velocity.y > -1)
+                else if (myRigid.velocity.y > -1)
                 {
+                    myRigid.velocity = Vector3.zero;
                     CreateBlock();
                 }
             }
@@ -89,15 +100,21 @@ public class BlockController : MonoBehaviour
         }
     }
 
-
-    void CreateBlock()
+    public void DoDestroy()
     {
-        myRigid.velocity = Vector3.zero;
+        PhotonNetwork.Destroy(this.gameObject);
+    }
 
+
+    private void CreateBlock()
+    {
+        if (!GameManager.isDroper)
+            return;
         Vec = Vector3.zero;
         Vec.y = 13f;
 
-        Instantiate(Resources.Load<GameObject>("Prefabs/Block"), Vec, Quaternion.identity, null);
+        PhotonNetwork.Instantiate("Prefabs/Block", Vec, Quaternion.identity);
+        //Instantiate(Resources.Load<GameObject>("Prefabs/Block"), Vec, Quaternion.identity, null);
 
         LineManager.inst.Check();
         LineManager.inst.OverCheck();
