@@ -6,13 +6,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float h;
-    Vector3 dir, rotate;
-    float posX;
-    Rigidbody myRigid;
-    Ray ray;
-    RaycastHit hit;
-    bool iscanJump;
+    private float h;
+    private Vector3 dir, rotate;
+    private float posX;
+    private Rigidbody myRigid;
+    private Ray ray;
+    private RaycastHit hit;
+    private PhotonView PV;
+
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        PV = GetComponent<PhotonView>();
         dir = Vector3.zero;
 
         rotate = Vector3.zero;
@@ -39,7 +41,6 @@ public class PlayerController : MonoBehaviour
         }
         posX = transform.position.x;
 
-        Debug.DrawRay(transform.position + Vector3.up, Vector3.right * dir.x, Color.red, 1f);
 
         h = Input.GetAxisRaw("Horizontal");
 
@@ -58,34 +59,38 @@ public class PlayerController : MonoBehaviour
         ray.origin = transform.position;
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log("Shot");
             ray.direction = Vector3.right * dir.x;
+            //ray.origin += Vector3.up * 03f;
+            Debug.DrawRay(ray.origin, ray.direction, Color.red, 1f);
             if (Physics.Raycast(ray, out hit, 1f, 1 << 3))
             {
-                hit.collider.GetComponent<BlockController>().DoDestroy();
+                Debug.Log("Hit");
+                GameManager.GM.UIMNG.AddBMHp(1);
+                GameManager.GM.UIMNG.AddDPHp(-1);
+                GameObject target = hit.collider.gameObject;
+                
+                
+                PV.RPC("BlockDestroy", RpcTarget.All, target.GetComponent<PhotonView>().ViewID);
             }
         }
 
+        ray.origin = transform.position;
         ray.direction = Vector3.up;
         if (Physics.Raycast(ray, 1f, 1 << 3))
         {
-            PhotonNetwork.Destroy(gameObject);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(iscanJump)
-            {
-                myRigid.AddForce(Vector3.up * 10, ForceMode.Impulse);
-                iscanJump = false;
-            }
-        }
-
-        ray.direction = Vector3.down;
-        if(Physics.Raycast(ray, out hit, 0.1f, 1<<3))
-        {
-            iscanJump = true;
+                GameManager.GM.UIMNG.AddBMHp(-1);
+                GameManager.GM.RespwanPlayer(3);
+                PhotonNetwork.Destroy(gameObject);
         }
 
         myRigid.velocity = (Vector3.right * h * 10) + (Vector3.up * myRigid.velocity.y);
+    }
+
+    [PunRPC]
+    private void BlockDestroy(int id)
+    {
+        PhotonView.Find(id).GetComponent<BlockController>().isDestroy = true;
+        //target
     }
 }

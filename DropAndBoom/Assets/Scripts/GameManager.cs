@@ -9,7 +9,7 @@ using PN = Photon.Pun.PhotonNetwork;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    PhotonView PV;
+    public PhotonView PV;
 
     [SerializeField]
     private GameObject titlePanel;
@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     private GameObject victoryPanel;
     [SerializeField]
     private GameObject losePanel;
+    [SerializeField]
+    private GameObject optionPanel;
+
+    [SerializeField]
+    private GameObject BMHp;
+    [SerializeField]
+    private GameObject DPHp;
 
     [SerializeField]
     private GameObject enterErrorBox;
@@ -42,6 +49,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public static bool isDroper; // t = droper, f = boomer
 
+    public static GameManager GM;
+    public UIManager UIMNG;
+
     private enum Scene
     {
         title, loby, ingame
@@ -51,9 +61,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        GM = this;
         PV = GetComponent<PhotonView>();
         SoundManager.soundMNG = GetComponent<SoundManager>();
         SoundManager.soundMNG.Init();
+        UIMNG = GetComponent<UIManager>();
         PN.LocalPlayer.NickName = $"{Random.Range(0, 100)}";
         isCanLeave = true;
         SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
@@ -101,6 +113,39 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             yield return null;
         }
+    }
+
+    public void ShowOptiopn()
+    {
+        optionPanel.SetActive(true);
+    }
+    public void DisableOptiopn()
+    {
+        optionPanel.SetActive(false);
+    }
+
+    public void GiveUp()
+    {
+        if(isDroper)
+        {
+            PV.RPC("DPHPToZero", RpcTarget.All);
+        }
+        else
+        {
+            PV.RPC("BMHPToZero", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    void BMHPToZero()
+    {
+            UIMNG.BMHpBar.value = 0;
+    }
+
+    [PunRPC]
+    void DPHPToZero()
+    {
+        UIMNG.DPHpBar.value = 0;
     }
 
     private IEnumerator GameFadeOut()
@@ -167,11 +212,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         loadingPanel.SetActive(false);
         roomPanel.SetActive(true);
         isDroper = true;
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log("Failed");
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -242,21 +282,36 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         yield return one;
+        countDown.text = "Count Down End";
+        SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.inGame);
+        inGameObjects.SetActive(true);
+        UIMNG.BMHpBar = BMHp.GetComponent<Slider>();
+        UIMNG.DPHpBar = DPHp.GetComponent<Slider>();
+
+        yield return one;
 
         while (true)
         {
-            SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.inGame);
-            inGameObjects.SetActive(true);
-            if(isDroper)
+            countDown.text = "";
+            if (isDroper)
             {
                 PN.Instantiate("Prefabs/Block", Vector3.zero + (Vector3.up * 13), Quaternion.identity);
             }
             else
             {
-                PN.Instantiate("Prefabs/Boomer", Vector3.zero, Quaternion.Euler(Vector3.up * 90));
+                CreatePlayer();
             }
-            countDown.text = "Count Down End";
             break;
         }
+    }
+
+    public void RespwanPlayer(float t)
+    {
+        Invoke("CreatePlayer", t);
+    }
+
+    public void CreatePlayer()
+    {
+        PN.Instantiate("Prefabs/Boomer", Vector3.zero, Quaternion.Euler(Vector3.up * 90));
     }
 }

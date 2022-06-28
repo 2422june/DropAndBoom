@@ -12,10 +12,14 @@ public class BlockController : MonoBehaviour
     bool isBust, isFalling, isLanding;
 
     int posX;
+    static int num;
+    public int myNum;
 
     Vector3 Vec;
 
     Rigidbody myRigid;
+
+    public bool isDestroy;
 
     void Start()
     {
@@ -96,15 +100,19 @@ public class BlockController : MonoBehaviour
                     CreateBlock();
                 }
             }
+        }
 
+        if(isDestroy)
+        {
+            Debug.Log("Destroy");
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
-    public void DoDestroy()
+    public void _Destroy()
     {
-        PhotonNetwork.Destroy(this.gameObject);
-    }
 
+    }
 
     private void CreateBlock()
     {

@@ -42,6 +42,14 @@ MonoBehaviour:
   - InGame
   - EnterGame
   - CreateBlock
+  - AddBMHp
+  - AddDPHp
+  - Attack
+  - _AddBMHp
+  - _AddDPHp
+  - BlockDestroy
+  - BMHPToZero
+  - DPHPToZero
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

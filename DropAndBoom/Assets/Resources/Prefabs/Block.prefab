@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 6841634011891358345}
   - component: {fileID: 3716610930005533635}
   - component: {fileID: 6367034907309124130}
+  - component: {fileID: 4780248274425220073}
   m_Layer: 3
   m_Name: Block
   m_TagString: Block
@@ -331,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 10
+  isDestroy: 0
 --- !u!114 &3716610930005533635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,8 +352,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 0}
   - {fileID: 6367034907309124130}
+  - {fileID: 4780248274425220073}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -369,8 +371,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
+--- !u!114 &4780248274425220073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507791468889350197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 10
 --- !u!1 &8507791469041070345
 GameObject:
   m_ObjectHideFlags: 0

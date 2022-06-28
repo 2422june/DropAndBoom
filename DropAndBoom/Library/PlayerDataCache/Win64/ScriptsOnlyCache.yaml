@@ -6,6 +6,7 @@ ScriptsOnlyBuild:
     - LineManager
     - PlayerController
     - SoundManager
+    - UIManager
     PhotonUnityNetworking.Demos.dll:
     - Photon.Pun.Demo.Asteroids.Asteroid
     - Photon.Pun.Demo.Asteroids.Bullet
@@ -216,6 +217,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 8388}
     - Class: 114
       Script: {instanceID: 8720}
+    - Class: 114
+      Script: {instanceID: 34220}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -627,7 +630,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 210c769b209820fded8f43e758c5d311
+      Hash: 5264d4a815709662b847bc913683588c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BlockController
@@ -1287,7 +1290,7 @@ ScriptsOnlyBuild:
     className: PunPlayerScores
   - hash:
       serializedVersion: 2
-      Hash: fce381f7b0fb4b5dc3debb92af523036
+      Hash: f8d55da3ca587af284e3485bda11088a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1939,6 +1942,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UIManager
   platform: 19
   scenePathNames:
   - Assets/Scenes/InGame.unity

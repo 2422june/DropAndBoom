@@ -31,11 +31,9 @@ public class LineManager : MonoBehaviour
         hit = Physics.RaycastAll(vec, transform.right, 1000, 1<<3);
 
         Debug.DrawRay(vec, transform.right, Color.red, 1);
-        Debug.Log(hit.Length);
 
         if (hit.Length >= 10)
         {
-            Debug.Log("LineClear");
 
             for (int i = 0; i < hit.Length; i++)
             {
@@ -44,6 +42,8 @@ public class LineManager : MonoBehaviour
                     PhotonNetwork.Destroy(hit[i].collider.gameObject);
                 }
             }
+
+            GameManager.GM.UIMNG.AddDPHp(3);
         }
     }
 
