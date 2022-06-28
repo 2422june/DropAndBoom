@@ -50,6 +50,12 @@ MonoBehaviour:
   - BlockDestroy
   - BMHPToZero
   - DPHPToZero
+  - Keep
+  - Pause
+  - KeepOtherPlayer
+  - PauseOtherPlayer
+  - CameraShake
+  - PlayEFT
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

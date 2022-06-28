@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundMNG;
 
-    public AudioSource BGM;// { get; private set; }
+    public AudioSource BGM;
     public List<AudioSource> EFTSources = new List<AudioSource>();
 
     [SerializeField]
@@ -16,7 +16,7 @@ public class SoundManager : MonoBehaviour
 
     public enum eftClip
     {
-        title, gameExit, enterRoom, cant
+        title, gameExit, enterRoom, cant, bmHit
     };
     public enum bgmClip
     {
@@ -35,7 +35,7 @@ public class SoundManager : MonoBehaviour
         }
         index--;
     }
-
+    
     public void PlayEFT(eftClip num)
     {
         EFTSources[index].clip = EftClips[(int)num];

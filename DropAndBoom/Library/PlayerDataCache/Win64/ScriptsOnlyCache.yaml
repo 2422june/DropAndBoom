@@ -5,6 +5,8 @@ ScriptsOnlyBuild:
     - GameManager
     - LineManager
     - PlayerController
+    - SelfDestroy
+    - SkinnedMeshAfterImage
     - SoundManager
     - UIManager
     PhotonUnityNetworking.Demos.dll:
@@ -39,8 +41,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -57,6 +61,8 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   serializedClasses:
+    Assembly-CSharp:
+    - AfterImageData
     PhotonRealtime:
     - Photon.Realtime.AppSettings
     PhotonUnityNetworking:
@@ -98,10 +104,25 @@ ScriptsOnlyBuild:
   methodsToPreserve:
   - assembly: Assembly-CSharp
     fullTypeName: GameManager
+    methodName: GiveUp
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
     methodName: OnClickEnterRandomRoom
   - assembly: Assembly-CSharp
     fullTypeName: GameManager
     methodName: LeaveRoom
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
+    methodName: SetBGMVolum
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
+    methodName: DisableOptiopn
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
+    methodName: ShowOptiopn
+  - assembly: Assembly-CSharp
+    fullTypeName: GameManager
+    methodName: SetEFTVolum
   - assembly: Assembly-CSharp
     fullTypeName: GameManager
     methodName: OnClickQuitGame
@@ -147,6 +168,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
+    - Class: 96
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
@@ -162,63 +185,67 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1818}
     - Class: 114
-      Script: {instanceID: 2262}
+      Script: {instanceID: 2232}
     - Class: 114
-      Script: {instanceID: 2732}
+      Script: {instanceID: 2264}
     - Class: 114
-      Script: {instanceID: 2966}
+      Script: {instanceID: 2734}
     - Class: 114
-      Script: {instanceID: 3082}
+      Script: {instanceID: 2968}
     - Class: 114
-      Script: {instanceID: 3198}
+      Script: {instanceID: 3084}
     - Class: 114
-      Script: {instanceID: 3292}
+      Script: {instanceID: 3200}
     - Class: 114
-      Script: {instanceID: 4092}
+      Script: {instanceID: 3294}
     - Class: 114
       Script: {instanceID: 4094}
     - Class: 114
-      Script: {instanceID: 4276}
+      Script: {instanceID: 4096}
     - Class: 114
-      Script: {instanceID: 4426}
+      Script: {instanceID: 4278}
     - Class: 114
-      Script: {instanceID: 4704}
+      Script: {instanceID: 4428}
     - Class: 114
-      Script: {instanceID: 5422}
+      Script: {instanceID: 4706}
     - Class: 114
-      Script: {instanceID: 5448}
+      Script: {instanceID: 5424}
     - Class: 114
-      Script: {instanceID: 5516}
+      Script: {instanceID: 5450}
     - Class: 114
-      Script: {instanceID: 5548}
+      Script: {instanceID: 5518}
     - Class: 114
-      Script: {instanceID: 5912}
+      Script: {instanceID: 5550}
     - Class: 114
       Script: {instanceID: 5914}
     - Class: 114
-      Script: {instanceID: 5960}
+      Script: {instanceID: 5916}
     - Class: 114
-      Script: {instanceID: 6166}
+      Script: {instanceID: 5962}
     - Class: 114
-      Script: {instanceID: 6320}
+      Script: {instanceID: 6168}
     - Class: 114
-      Script: {instanceID: 6672}
+      Script: {instanceID: 6322}
     - Class: 114
-      Script: {instanceID: 6686}
+      Script: {instanceID: 6674}
     - Class: 114
-      Script: {instanceID: 7320}
+      Script: {instanceID: 6688}
     - Class: 114
-      Script: {instanceID: 7634}
+      Script: {instanceID: 7322}
     - Class: 114
-      Script: {instanceID: 7872}
+      Script: {instanceID: 7636}
     - Class: 114
-      Script: {instanceID: 8256}
+      Script: {instanceID: 7874}
     - Class: 114
-      Script: {instanceID: 8388}
+      Script: {instanceID: 8258}
     - Class: 114
-      Script: {instanceID: 8720}
+      Script: {instanceID: 8390}
     - Class: 114
-      Script: {instanceID: 34220}
+      Script: {instanceID: 8722}
+    - Class: 114
+      Script: {instanceID: 75852}
+    - Class: 114
+      Script: {instanceID: 117958}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -412,6 +439,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnTriggerEnterMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UIManager
   - hash:
       serializedVersion: 2
       Hash: 800c50acba124432abb4cf0d47202e06
@@ -1290,7 +1323,7 @@ ScriptsOnlyBuild:
     className: PunPlayerScores
   - hash:
       serializedVersion: 2
-      Hash: f8d55da3ca587af284e3485bda11088a
+      Hash: d169ae6d5b8c7bb25a762deefc02da5e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -1944,10 +1977,34 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 4730345513fe0c44181f3ac02610b3f4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MeshAfterImage
+  - hash:
+      serializedVersion: 2
+      Hash: 4730345513fe0c44181f3ac02610b3f4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SkinnedMeshAfterImage
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: UIManager
+    className: SkinnedMeshAfterImageFader
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MeshAfterImageFader
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SelfDestroy
   platform: 19
   scenePathNames:
   - Assets/Scenes/InGame.unity

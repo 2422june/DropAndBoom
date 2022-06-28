@@ -775,7 +775,7 @@ RectTransform:
   - {fileID: 1018726237}
   - {fileID: 1364087646}
   m_Father: {fileID: 545597241}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1486,7 +1486,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 545597241}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2082,10 +2082,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.648
+  m_Value: 0.3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404123195}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetBGMVolum
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &514120374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &545597241
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2365,11 +2377,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 701489470}
-  - {fileID: 1693635649}
   - {fileID: 1227810655}
   - {fileID: 214343518}
   - {fileID: 319060312}
   - {fileID: 1752219006}
+  - {fileID: 1693635649}
   - {fileID: 1475883647}
   m_Father: {fileID: 1287625874}
   m_RootOrder: 5
@@ -2926,7 +2938,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1404123195}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ShowOptiopn
+        m_MethodName: DisableOptiopn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3917,7 +3929,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4082,10 +4094,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.378
+  m_Value: 0.3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404123195}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SetEFTVolum
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &959989490
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,7 +4144,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4862,7 +4886,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 545597241}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4983,7 +5007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1228904814
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5302,7 +5326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1353282309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5580,9 +5604,11 @@ MonoBehaviour:
   loadingPanel: {fileID: 1861220755}
   roomPanel: {fileID: 1094301048}
   inGamePanel: {fileID: 545597240}
-  victoryPanel: {fileID: 0}
-  losePanel: {fileID: 0}
+  victoryPanel: {fileID: 1228904813}
+  LosePanel: {fileID: 1353282308}
+  ResultPanel: {fileID: 1475883646}
   optionPanel: {fileID: 955085154}
+  WaitingText: {fileID: 558448851}
   BMHp: {fileID: 1752219005}
   DPHp: {fileID: 214343517}
   enterErrorBox: {fileID: 375628616}
@@ -5590,7 +5616,10 @@ MonoBehaviour:
   roomInfo: {fileID: 815685058}
   inGameObjects: {fileID: 2056363306}
   countDown: {fileID: 1693635650}
+  BGMSlider: {fileID: 473251363}
+  EFTSlider: {fileID: 959860195}
   UIMNG: {fileID: 0}
+  scene: 0
 --- !u!4 &1404123196
 Transform:
   m_ObjectHideFlags: 0
@@ -5663,6 +5692,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 12e0bb48b002ad3429ef4850a06f6ee0, type: 3}
   - {fileID: 8300000, guid: 3bbe8befec537914fb417d2d03478a9f, type: 3}
   - {fileID: 8300000, guid: 10a5ea5c364b2e341bf7c7a316003c44, type: 3}
+  - {fileID: 8300000, guid: f0b2979f2bf9142448d9aa12cc50660c, type: 3}
   bgmClips:
   - {fileID: 8300000, guid: e2bc82d400426c446b9bf2a27e5bb2e2, type: 3}
   - {fileID: 8300000, guid: 282a9acc0fb02bf42be023379c5fec8f, type: 3}
@@ -6297,7 +6327,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 545597241}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6326,7 +6356,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 63cd24d6134492b43a9c8f0180034722, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6390,7 +6420,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1693635651
@@ -6593,7 +6623,7 @@ RectTransform:
   - {fileID: 187451548}
   - {fileID: 1503551456}
   m_Father: {fileID: 545597241}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

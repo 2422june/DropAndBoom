@@ -20,6 +20,8 @@ public class BlockController : MonoBehaviour
     Rigidbody myRigid;
 
     public bool isDestroy;
+    private PhotonView PV;
+    private GameObject particle;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class BlockController : MonoBehaviour
         posX = 0;
 
         myRigid = GetComponent<Rigidbody>();
+        PV = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -104,20 +107,23 @@ public class BlockController : MonoBehaviour
 
         if(isDestroy)
         {
-            Debug.Log("Destroy");
+            particle = PhotonNetwork.Instantiate("Prefabs/Magic", transform.position, Quaternion.identity);
             PhotonNetwork.Destroy(gameObject);
         }
-    }
 
-    public void _Destroy()
-    {
-
+        if(GameManager.GM.scene != GameManager.Scene.ingame)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     private void CreateBlock()
     {
         if (!GameManager.isDroper)
             return;
+
+        GameManager.GM.PV.RPC("CameraShake", RpcTarget.All);
+
         Vec = Vector3.zero;
         Vec.y = 13f;
 
@@ -128,5 +134,11 @@ public class BlockController : MonoBehaviour
         LineManager.inst.OverCheck();
 
         isLanding = true;
+    }
+
+    [PunRPC]
+    private void CameraShake()
+    {
+        GameManager.GM.CameraShake();
     }
 }

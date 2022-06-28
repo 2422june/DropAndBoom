@@ -79,12 +79,17 @@ public class PlayerController : MonoBehaviour
         ray.direction = Vector3.up;
         if (Physics.Raycast(ray, 1f, 1 << 3))
         {
-                GameManager.GM.UIMNG.AddBMHp(-1);
-                GameManager.GM.RespwanPlayer(3);
-                PhotonNetwork.Destroy(gameObject);
+            GameManager.GM.UIMNG.AddBMHp(-1);
+            GameManager.GM.RespwanPlayer(3);
+            PhotonNetwork.Destroy(gameObject);
         }
 
         myRigid.velocity = (Vector3.right * h * 10) + (Vector3.up * myRigid.velocity.y);
+
+        if (GameManager.GM.scene != GameManager.Scene.ingame)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     [PunRPC]

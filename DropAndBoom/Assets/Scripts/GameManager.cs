@@ -24,9 +24,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject victoryPanel;
     [SerializeField]
-    private GameObject losePanel;
+    private GameObject LosePanel;
+    [SerializeField]
+    private GameObject ResultPanel;
     [SerializeField]
     private GameObject optionPanel;
+    [SerializeField]
+    private TMP_Text WaitingText;
 
     [SerializeField]
     private GameObject BMHp;
@@ -44,20 +48,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     private GameObject inGameObjects;
     [SerializeField]
     private TMP_Text countDown;
+    [SerializeField]
+    private Slider BGMSlider;
+    [SerializeField]
+    private Slider EFTSlider;
 
     private bool isCanLeave;
 
     public static bool isDroper; // t = droper, f = boomer
+    public static bool isPause;
+    private bool isInGame;
 
     public static GameManager GM;
     public UIManager UIMNG;
 
-    private enum Scene
+    public enum Scene
     {
         title, loby, ingame
     };
 
-    private Scene scene;
+    public Scene scene;
 
     private void Awake()
     {
@@ -68,8 +78,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         UIMNG = GetComponent<UIManager>();
         PN.LocalPlayer.NickName = $"{Random.Range(0, 100)}";
         isCanLeave = true;
+        SetBGMVolum();
+        SetEFTVolum();
         SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
         SetScene("title");
+    }
+
+    private void Start()
+    {
+        shakeOriginPos = Camera.main.transform.position;
     }
 
     private void SetScene(string target)
@@ -117,11 +134,18 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void ShowOptiopn()
     {
-        optionPanel.SetActive(true);
+        if(isInGame && !isPause)
+        {
+            optionPanel.SetActive(true);
+            PV.RPC("Pause", RpcTarget.All);
+            PV.RPC("PauseOtherPlayer", RpcTarget.Others);
+        }
     }
     public void DisableOptiopn()
     {
         optionPanel.SetActive(false);
+        PV.RPC("Keep", RpcTarget.All);
+        PV.RPC("KeepOtherPlayer", RpcTarget.Others);
     }
 
     public void GiveUp()
@@ -139,7 +163,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void BMHPToZero()
     {
-            UIMNG.BMHpBar.value = 0;
+        UIMNG.BMHpBar.value = 0;
     }
 
     [PunRPC]
@@ -189,6 +213,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         isDroper = true;
         if (PN.CurrentRoom.PlayerCount == PN.CurrentRoom.MaxPlayers)
         {
+            WaitingText.text = "다른 참가자가 입장했습니다.";
             isCanLeave = false;
             isDroper = false;
             SoundManager.soundMNG.StopBGM();
@@ -200,6 +225,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (PN.CurrentRoom.PlayerCount == PN.CurrentRoom.MaxPlayers)
         {
+            WaitingText.text = "다른 참가자가 입장했습니다.";
             isCanLeave = false;
             SoundManager.soundMNG.StopBGM();
             PV.RPC("EnterGame", RpcTarget.All, null);
@@ -259,15 +285,18 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void EnterGame()
     {
+        SetScene("ingame");
         StartCoroutine(InGame());
     }
 
     private IEnumerator InGame()
     {
+        isPause = false;
         yield return one;
         yield return one;
         //loadingPanel.SetActive(true);
         roomPanel.SetActive(false);
+        WaitingText.text = "다른 참가자를 기다리는 중";
         SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.enterRoom);
         yield return one;
         yield return one;
@@ -289,20 +318,103 @@ public class GameManager : MonoBehaviourPunCallbacks
         UIMNG.DPHpBar = DPHp.GetComponent<Slider>();
 
         yield return one;
+        countDown.text = "";
+        if (isDroper)
+        {
+            PN.Instantiate("Prefabs/Block", Vector3.zero + (Vector3.up * 13), Quaternion.identity);
+        }
+        else
+        {
+            CreatePlayer();
+        }
+        isInGame = true;
 
         while (true)
         {
-            countDown.text = "";
-            if (isDroper)
+            if (UIMNG.BMHpBar.value <= 0)
             {
-                PN.Instantiate("Prefabs/Block", Vector3.zero + (Vector3.up * 13), Quaternion.identity);
+                SoundManager.soundMNG.StopBGM();
+                ResultPanel.SetActive(true);
+                if (isDroper)
+                {
+                    victoryPanel.SetActive(true);
+                }
+                else
+                {
+                    LosePanel.SetActive(true);
+                }
+                DisableOptiopn();
+                break;
             }
-            else
+            if (UIMNG.DPHpBar.value <= 0)
             {
-                CreatePlayer();
+                SoundManager.soundMNG.StopBGM();
+                ResultPanel.SetActive(true);
+                if (isDroper)
+                {
+                    LosePanel.SetActive(true);
+                }
+                else
+                {
+                    victoryPanel.SetActive(true);
+                }
+                DisableOptiopn();
+                break;
             }
-            break;
+            yield return null;
         }
+
+        PN.LeaveRoom();
+
+        yield return one;
+
+        while (true)
+        {
+            if (Input.anyKeyDown)
+            {
+                UIMNG.BMHpBar.value = 3;
+                UIMNG.DPHpBar.value = 10;
+
+                ResultPanel.SetActive(false);
+                victoryPanel.SetActive(false);
+                LosePanel.SetActive(false);
+                inGameObjects.SetActive(false);
+                inGamePanel.SetActive(false);
+                DisableOptiopn();
+
+                SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.title);
+                SoundManager.soundMNG.PlayBGM(SoundManager.bgmClip.title);
+
+                SetScene("loby");
+                break;
+            }
+
+            yield return null;
+        }
+    }
+
+    [PunRPC]
+    private void Pause()
+    {
+        isPause = true;
+    }
+
+    [PunRPC]
+    private void Keep()
+    {
+        isPause = false;
+    }
+
+    [PunRPC]
+    private void PauseOtherPlayer()
+    {
+        countDown.text = "상대가 게임을 정지 했습니다.";
+    }
+
+    [PunRPC]
+    private void KeepOtherPlayer()
+    {
+        countDown.text = "";
     }
 
     public void RespwanPlayer(float t)
@@ -313,5 +425,45 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void CreatePlayer()
     {
         PN.Instantiate("Prefabs/Boomer", Vector3.zero, Quaternion.Euler(Vector3.up * 90));
+    }
+
+    public void SetBGMVolum()
+    {
+        SoundManager.soundMNG.BGM.volume = BGMSlider.value;
+    }
+
+    public void SetEFTVolum()
+    {
+        SoundManager.soundMNG.EFTSources[1].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[2].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[3].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[4].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[5].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[6].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[7].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[8].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[9].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[0].volume = EFTSlider.value;
+    }
+
+    private Vector3 shakePos;
+    private Vector3 shakeOriginPos;
+    private int shakeCnt;
+    private WaitForSeconds shakeDelay = new WaitForSeconds(0.03f);
+
+    [PunRPC]
+    public IEnumerator CameraShake()
+    {
+        shakeCnt = Random.Range(3, 10);
+
+        while(shakeCnt > 0)
+        {
+            shakePos.x = Random.Range(-0.3f, 0.3f);
+            shakePos.y = Random.Range(-0.3f, 0.3f);
+            Camera.main.transform.position += shakePos;
+            yield return shakeDelay;
+            shakeCnt--;
+            Camera.main.transform.position = shakeOriginPos;
+        }
     }
 }

@@ -17,6 +17,7 @@ public class LineManager : MonoBehaviour
     private int cnt;
 
     private Vector3 vec;
+    private GameObject particle;
 
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class LineManager : MonoBehaviour
         cnt = 0;
         vec = rayPos.transform.position;
 
-        hit = Physics.RaycastAll(vec, transform.right, 1000, 1<<3);
+        hit = Physics.RaycastAll(vec, transform.right, 1000, 1 << 3);
 
         Debug.DrawRay(vec, transform.right, Color.red, 1);
 
@@ -39,6 +40,9 @@ public class LineManager : MonoBehaviour
             {
                 if (hit[i].collider.CompareTag("Block"))
                 {
+                    PhotonNetwork.Instantiate("Prefabs/Block", hit[i].transform.position, Quaternion.identity);
+
+
                     PhotonNetwork.Destroy(hit[i].collider.gameObject);
                 }
             }
@@ -49,18 +53,17 @@ public class LineManager : MonoBehaviour
 
     public void OverCheck()
     {
-        cnt = 0;
-        vec = transform.position;
+        vec = rayPos.transform.position;
         vec.y += 15;
 
-        hit = Physics.RaycastAll(vec, transform.right, 1000);
+        hit = Physics.RaycastAll(vec, Vector3.right, 1000, 1<<3);
 
 
         for (int i = 0; i < hit.Length; i++)
         {
             if (hit[i].collider.CompareTag("Block"))
             {
-                Debug.Log("Gameover");
+                GameManager.GM.GiveUp();
             }
         }
     }
