@@ -41,10 +41,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -175,77 +173,77 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1554}
-    - Class: 114
       Script: {instanceID: 1556}
     - Class: 114
-      Script: {instanceID: 1654}
+      Script: {instanceID: 1558}
     - Class: 114
-      Script: {instanceID: 1788}
+      Script: {instanceID: 1656}
     - Class: 114
-      Script: {instanceID: 1818}
+      Script: {instanceID: 1790}
     - Class: 114
-      Script: {instanceID: 2232}
+      Script: {instanceID: 1820}
     - Class: 114
-      Script: {instanceID: 2264}
+      Script: {instanceID: 2234}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2266}
     - Class: 114
-      Script: {instanceID: 2968}
+      Script: {instanceID: 2736}
     - Class: 114
-      Script: {instanceID: 3084}
+      Script: {instanceID: 2970}
     - Class: 114
-      Script: {instanceID: 3200}
+      Script: {instanceID: 3086}
     - Class: 114
-      Script: {instanceID: 3294}
+      Script: {instanceID: 3204}
     - Class: 114
-      Script: {instanceID: 4094}
+      Script: {instanceID: 3298}
     - Class: 114
-      Script: {instanceID: 4096}
+      Script: {instanceID: 3500}
     - Class: 114
-      Script: {instanceID: 4278}
+      Script: {instanceID: 4100}
     - Class: 114
-      Script: {instanceID: 4428}
+      Script: {instanceID: 4102}
     - Class: 114
-      Script: {instanceID: 4706}
+      Script: {instanceID: 4286}
     - Class: 114
-      Script: {instanceID: 5424}
+      Script: {instanceID: 4436}
     - Class: 114
-      Script: {instanceID: 5450}
+      Script: {instanceID: 4716}
     - Class: 114
-      Script: {instanceID: 5518}
+      Script: {instanceID: 5342}
     - Class: 114
-      Script: {instanceID: 5550}
+      Script: {instanceID: 5436}
     - Class: 114
-      Script: {instanceID: 5914}
+      Script: {instanceID: 5462}
     - Class: 114
-      Script: {instanceID: 5916}
+      Script: {instanceID: 5530}
     - Class: 114
-      Script: {instanceID: 5962}
+      Script: {instanceID: 5562}
     - Class: 114
-      Script: {instanceID: 6168}
+      Script: {instanceID: 5926}
     - Class: 114
-      Script: {instanceID: 6322}
+      Script: {instanceID: 5928}
     - Class: 114
-      Script: {instanceID: 6674}
+      Script: {instanceID: 5974}
     - Class: 114
-      Script: {instanceID: 6688}
+      Script: {instanceID: 6180}
     - Class: 114
-      Script: {instanceID: 7322}
+      Script: {instanceID: 6338}
     - Class: 114
-      Script: {instanceID: 7636}
+      Script: {instanceID: 6690}
     - Class: 114
-      Script: {instanceID: 7874}
+      Script: {instanceID: 6704}
     - Class: 114
-      Script: {instanceID: 8258}
+      Script: {instanceID: 7340}
     - Class: 114
-      Script: {instanceID: 8390}
+      Script: {instanceID: 7658}
     - Class: 114
-      Script: {instanceID: 8722}
+      Script: {instanceID: 7898}
     - Class: 114
-      Script: {instanceID: 75852}
+      Script: {instanceID: 8282}
     - Class: 114
-      Script: {instanceID: 117958}
+      Script: {instanceID: 8416}
+    - Class: 114
+      Script: {instanceID: 8748}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -669,6 +667,12 @@ ScriptsOnlyBuild:
     className: BlockController
   - hash:
       serializedVersion: 2
+      Hash: 89cbcfa77989979e1843b899c81094a8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EmitParticlesOnLand
+  - hash:
+      serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -769,6 +773,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ContentSizeFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 4730345513fe0c44181f3ac02610b3f4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SkinnedMeshAfterImage
   - hash:
       serializedVersion: 2
       Hash: 2574ac7d50617d23cdefe4ad22f5e1ad
@@ -910,6 +920,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MeshAfterImageFader
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PunTeams
@@ -1027,6 +1043,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: DocLinkButton
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TemplateEditorDetection
   - hash:
       serializedVersion: 2
       Hash: 6980e81ddc615a861309d2d659cc3760
@@ -1189,6 +1211,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: IntInputField
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SelfDestroy
   - hash:
       serializedVersion: 2
       Hash: b89ca8c8ae7041500fa1df2b061f55c9
@@ -1395,10 +1423,22 @@ ScriptsOnlyBuild:
     className: AnimatorMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 60ba3b92a2f9986a9e84bdcbf4124018
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EmitParticlesOnBallBounce
+  - hash:
+      serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: AspectRatioFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 4730345513fe0c44181f3ac02610b3f4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MeshAfterImage
   - hash:
       serializedVersion: 2
       Hash: 760787567e1b60d64a3e421ab83ee14a
@@ -1557,6 +1597,12 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SkinnedMeshAfterImageFader
+  - hash:
+      serializedVersion: 2
       Hash: 3164bc883ff663a5cdb32d1ef7e7c0c5
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -1609,6 +1655,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: PositionAsUV1
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EmitParticlesOnKartBounce
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1975,36 +2027,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 4730345513fe0c44181f3ac02610b3f4
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MeshAfterImage
-  - hash:
-      serializedVersion: 2
-      Hash: 4730345513fe0c44181f3ac02610b3f4
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SkinnedMeshAfterImage
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SkinnedMeshAfterImageFader
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MeshAfterImageFader
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SelfDestroy
   platform: 19
   scenePathNames:
   - Assets/Scenes/InGame.unity

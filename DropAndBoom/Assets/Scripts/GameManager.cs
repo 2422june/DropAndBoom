@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
+        Debug.Log("leave");
         if(isCanLeave)
         {
             SoundManager.soundMNG.PlayEFT(SoundManager.eftClip.gameExit);
@@ -303,6 +304,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         loadingPanel.SetActive(false);
         inGamePanel.SetActive(true);
+        isCanLeave = true;
         for (int i = 5; i >= 0; i--)
         {
             yield return one;

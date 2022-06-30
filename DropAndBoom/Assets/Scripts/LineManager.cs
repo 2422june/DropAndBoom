@@ -40,7 +40,7 @@ public class LineManager : MonoBehaviour
             {
                 if (hit[i].collider.CompareTag("Block"))
                 {
-                    PhotonNetwork.Instantiate("Prefabs/Block", hit[i].transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate("Prefabs/Magic", hit[i].transform.position, Quaternion.identity);
 
 
                     PhotonNetwork.Destroy(hit[i].collider.gameObject);
