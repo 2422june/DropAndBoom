@@ -120,9 +120,6 @@ ScriptsOnlyBuild:
     methodName: ShowOptiopn
   - assembly: Assembly-CSharp
     fullTypeName: GameManager
-    methodName: SetEFTVolum
-  - assembly: Assembly-CSharp
-    fullTypeName: GameManager
     methodName: OnClickQuitGame
   sceneClasses:
     Assets/Scenes/InGame.unity:

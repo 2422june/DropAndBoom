@@ -436,16 +436,16 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SetEFTVolum()
     {
-        SoundManager.soundMNG.EFTSources[1].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[2].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[3].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[4].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[5].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[6].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[7].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[8].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[9].volume = EFTSlider.value;
-        SoundManager.soundMNG.EFTSources[0].volume = EFTSlider.value;
+        SoundManager.soundMNG.EFTSources[1].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[2].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[3].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[4].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[5].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[6].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[7].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[8].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[9].volume = 30;//FTSlider.value;
+        SoundManager.soundMNG.EFTSources[0].volume = 30;//EFTSlider.value;
     }
 
     private Vector3 shakePos;
